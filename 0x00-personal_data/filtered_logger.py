@@ -46,7 +46,7 @@ class RedactingFormatter(logging.Formatter):
         """
         It formats the LogRecord
         """
-        msg = super(RedactingFormatter, self).format(record)
+        mesg = super(RedactingFormatter, self).format(record)
         txt = filter_datum(self.fields, self.REDACTION, mesg, self.SEPARATOR)
         return txt
 
