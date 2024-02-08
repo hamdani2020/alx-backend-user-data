@@ -27,19 +27,6 @@ def filter_datum(
     return re.sub(extract(fields, separator), replace(redaction), message)
 
 
-def get_logger() -> logging.Logger:
-    """
-    It created a new logger for user data
-    """
-    logger = logging.getLogger("user_data")
-    stream_handler = logging.StreamHander()
-    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
-    logger.setLevel(logging.INFO)
-    logger.propagate = False
-    logger.addHandler(stream_handler)
-    return logger
-
-
 class RedactingFormatter(logging.Formatter):
     """
     Class for Redacting Formatter
@@ -65,3 +52,16 @@ class RedactingFormatter(logging.Formatter):
 
 if __name__ == '__main__':
     main()
+
+
+def get_logger() -> logging.Logger:
+    """
+    It created a new logger for user data
+    """
+    logger = logging.getLogger("user_data")
+    stream_handler = logging.StreamHander()
+    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    logger.addHandler(stream_handler)
+    return logger
