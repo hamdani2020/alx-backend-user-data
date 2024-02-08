@@ -58,10 +58,28 @@ def get_logger() -> logging.Logger:
     """
     It created a new logger for user data
     """
-    logger = logging.getLogger("user_data")
+    logger = logging.getLogger('user_data')
     stream_handler = logging.StreamHander()
     stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.setLevel(logging.INFO)
     logger.propagate = False
     logger.addHandler(stream_handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """
+    Create a secure database with environment variables
+    """
+    db_user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    db_password = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    user.name = os.getenv("PERSONAL_DATA_DB_NAME", "")
+    connection = msql.connector.connect(
+        host=db_host,
+        port=3306,
+        user=db_user,
+        password=db_pwd,
+        database=db_name,
+    )
+    return connection
