@@ -27,7 +27,6 @@ def filter_datum(
     return re.sub(extract(fields, separator), replace(redaction), message)
 
 
-
 class RedactingFormatter(logging.Formatter):
     """
     Class for Redacting Formatter
