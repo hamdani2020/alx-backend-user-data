@@ -83,3 +83,25 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=db_name,
     )
     return connection
+
+
+def main():
+    """It logs information about user in a table
+    """
+    fields = "name,email,phone,ssn,password,ip,last_login,user_agent"
+    columns = fields.split(',')
+    queries = "SELECT {} FROM users;".format(fields)
+    InfoLogger = get_logger()
+    connection = get_db()
+    with connection.cursor() as cursor:
+        cursor.execute(queries)
+        rows = cursor.fetchall()
+        for row in rows:
+            record = map(
+                lambda x: '{}={}'.format(x[0], x[1]),
+                zip(columns, row),
+            )
+            msg = '{};'.format('; '.join(list(record)))
+            args = ("user_data", logging.INFO, None, None, msg, None, None)
+            log_record = logging.LogRecord(*args)
+            InfoLogger.handle(log_record)
