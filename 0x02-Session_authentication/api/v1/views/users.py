@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""
-This is a module of Users views.
+"""Module of Users views.
 """
 from api.v1.views import app_views
-from flask import abort, jsonify, request
 from models.user import User
+from flask import abort, request, jsonify
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
 def view_all_users() -> str:
     """
+    Return:
       - list of all User objects JSON represented.
     """
     all_users = [user.to_json() for user in User.all()]
@@ -91,7 +91,7 @@ def update_user(user_id: str = None) -> str:
     Return:
       - User object JSON represented.
       - 404 if the User ID doesn't exist.
-      - 400 if can't update the User.
+      - 400 if cannot update the User.
     """
     if user_id is None:
         abort(404)
