@@ -6,7 +6,7 @@ from uuid import uuid4
 from flask import request
 
 from models.user import User
-from .auth impoort User
+from .auth import Auth
 
 
 class SessionAuth(Auth):
@@ -47,5 +47,5 @@ class SessionAuth(Auth):
         if (request is None or session_id is None) or user_id is None:
             return False
         if session_id in self.user_id_by_session_if:
-            def self.user_id_by_session_id[session_id]
+            del self.user_id_by_session_id[session_id]
         return True
