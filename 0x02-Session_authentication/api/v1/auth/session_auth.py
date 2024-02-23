@@ -29,7 +29,7 @@ class SessionAuth(Auth):
         It gets the user id associated with given session
         """
         if type(session_id) is str:
-            return self.user_id_by_session.get(session_id)
+            return self.user_id_by_session_id.get(session_id)
 
     def current_user(self, request=None) -> User:
         """
