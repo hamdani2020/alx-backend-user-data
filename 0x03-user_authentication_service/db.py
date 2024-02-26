@@ -18,7 +18,6 @@ class DB:
     DB class
     """
 
-
     def __init__(self) -> None:
         """
         Initialize a new DB instance
@@ -43,10 +42,10 @@ class DB:
         It adds a new user to the database
         """
         try:
-            NewUser = User(email=email, hashed_password=hashed_password)
-            self._session.add(NewUser)
+            new_user = User(email=email, hashed_password=hashed_password)
+            self._session.add(new_user)
             self._session.commit()
         except Exception:
             self._session.rollback()
-            NewUser = None
-        return NewUser
+            new_user = None
+        return new_user
